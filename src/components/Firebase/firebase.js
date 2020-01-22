@@ -1,16 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 
-// const config = {
-//     apiKey: "AIzaSyA696uczKAMC7SjAmR69TN-iXXy8M5rxwk",
-//     authDomain: "padel-score-tracker.firebaseapp.com",
-//     databaseURL: "https://padel-score-tracker.firebaseio.com",
-//     projectId: "padel-score-tracker",
-//     storageBucket: "padel-score-tracker.appspot.com",
-//     messagingSenderId: "769521886024",
-//     appId: "1:769521886024:web:a5b9c9a3823500d7a7097d",
-//     measurementId: "G-RHCL15SM91"
-// };
+
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -22,8 +13,6 @@ const config = {
     appId: process.env.REACT_APP_APP_ID,
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
-
-
 
 class Firebase {
     constructor() {

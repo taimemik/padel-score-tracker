@@ -5,6 +5,13 @@ import { compose } from 'recompose';
 import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import './signIn.css';
 
 const SignInPage = () => (
   <div>
@@ -54,25 +61,32 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+        <div className="flex-container">
+          <TextField
+            name="email"
+            required
+            id="outlined-required"
+            label="Email address"
+            variant="outlined"
+            value={email}
+            onChange={this.onChange}
+          />
+          <TextField
+            name="password"
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            variant="outlined"
+            onChange={this.onChange}
+          />
 
-        {error && <p>{error.message}</p>}
+          <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+            Sign In
+          </Button>
+
+          {error && <p>{error.message}</p>}
+        </div>
       </form>
     );
   }
