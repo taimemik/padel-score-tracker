@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/padel-score-tracker/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/padel-score-tracker/static/js/main.9fc6617b.chunk.js",
-    "main.js.map": "/padel-score-tracker/static/js/main.9fc6617b.chunk.js.map",
+    "main.css": "/padel-score-tracker/static/css/main.78bdf1c3.chunk.css",
+    "main.js": "/padel-score-tracker/static/js/main.5866a30a.chunk.js",
+    "main.js.map": "/padel-score-tracker/static/js/main.5866a30a.chunk.js.map",
     "runtime-main.js": "/padel-score-tracker/static/js/runtime-main.8d7e12c0.js",
     "runtime-main.js.map": "/padel-score-tracker/static/js/runtime-main.8d7e12c0.js.map",
-    "static/js/2.6a0cabd1.chunk.js": "/padel-score-tracker/static/js/2.6a0cabd1.chunk.js",
-    "static/js/2.6a0cabd1.chunk.js.map": "/padel-score-tracker/static/js/2.6a0cabd1.chunk.js.map",
+    "static/css/2.f44440ab.chunk.css": "/padel-score-tracker/static/css/2.f44440ab.chunk.css",
+    "static/js/2.f0f4bf9f.chunk.js": "/padel-score-tracker/static/js/2.f0f4bf9f.chunk.js",
+    "static/js/2.f0f4bf9f.chunk.js.map": "/padel-score-tracker/static/js/2.f0f4bf9f.chunk.js.map",
     "index.html": "/padel-score-tracker/index.html",
-    "precache-manifest.0ba23483cef7aa76ffe14485b937bc70.js": "/padel-score-tracker/precache-manifest.0ba23483cef7aa76ffe14485b937bc70.js",
+    "precache-manifest.0ba4616ff6c6f5a1ea7dff4c2e9e5bd0.js": "/padel-score-tracker/precache-manifest.0ba4616ff6c6f5a1ea7dff4c2e9e5bd0.js",
     "service-worker.js": "/padel-score-tracker/service-worker.js",
-    "static/css/main.5ecd60fb.chunk.css.map": "/padel-score-tracker/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.6a0cabd1.chunk.js.LICENSE": "/padel-score-tracker/static/js/2.6a0cabd1.chunk.js.LICENSE"
+    "static/css/2.f44440ab.chunk.css.map": "/padel-score-tracker/static/css/2.f44440ab.chunk.css.map",
+    "static/css/main.78bdf1c3.chunk.css.map": "/padel-score-tracker/static/css/main.78bdf1c3.chunk.css.map",
+    "static/js/2.f0f4bf9f.chunk.js.LICENSE": "/padel-score-tracker/static/js/2.f0f4bf9f.chunk.js.LICENSE",
+    "static/media/index.css": "/padel-score-tracker/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.8d7e12c0.js",
-    "static/js/2.6a0cabd1.chunk.js",
-    "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.9fc6617b.chunk.js"
+    "static/css/2.f44440ab.chunk.css",
+    "static/js/2.f0f4bf9f.chunk.js",
+    "static/css/main.78bdf1c3.chunk.css",
+    "static/js/main.5866a30a.chunk.js"
   ]
 }
