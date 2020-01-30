@@ -22,6 +22,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 
 function App() {
+  // eslint-disable-next-line
   const theme = React.useMemo(
     () =>
       createMuiTheme({

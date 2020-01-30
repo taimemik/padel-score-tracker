@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
-import SignOutButton from '../SignOut';
+import SignOutLink from '../SignOut/link';
 import * as ROUTES from '../../constants/routes';
 
 import { AuthUserContext } from '../Session';
 
+
 const Navigation = () => (
-  <div>
+  <div >
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? <NavigationAuth /> : <NavigationNonAuth />
@@ -17,32 +18,33 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <ul>
+  <ul className="navigation">
     <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <Link href={ROUTES.LANDING}>Landing</Link>
     </li>
     <li>
-      <Link to={ROUTES.HOME}>Home</Link>
+      <Link href={ROUTES.HOME}>Home</Link>
     </li>
     <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
+      <Link href={ROUTES.ACCOUNT}>Account</Link>
     </li>
     <li>
-      <Link to={ROUTES.ADMIN}>Admin</Link>
+      <Link href={ROUTES.ADMIN}>Admin</Link>
     </li>
     <li>
-      <SignOutButton />
+      <SignOutLink />
     </li>
+
   </ul>
 );
 
 const NavigationNonAuth = () => (
-  <ul>
+  <ul className="navigation">
     <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <Link href={ROUTES.LANDING}>Landing</Link>
     </li>
     <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <Link href={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
   </ul>
 );
