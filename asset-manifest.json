@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/padel-score-tracker/static/css/main.694fc21f.chunk.css",
-    "main.js": "/padel-score-tracker/static/js/main.c83fc4c0.chunk.js",
-    "main.js.map": "/padel-score-tracker/static/js/main.c83fc4c0.chunk.js.map",
+    "main.js": "/padel-score-tracker/static/js/main.ad707c13.chunk.js",
+    "main.js.map": "/padel-score-tracker/static/js/main.ad707c13.chunk.js.map",
     "runtime-main.js": "/padel-score-tracker/static/js/runtime-main.8d7e12c0.js",
     "runtime-main.js.map": "/padel-score-tracker/static/js/runtime-main.8d7e12c0.js.map",
     "static/css/2.f44440ab.chunk.css": "/padel-score-tracker/static/css/2.f44440ab.chunk.css",
     "static/js/2.18a21ebb.chunk.js": "/padel-score-tracker/static/js/2.18a21ebb.chunk.js",
     "static/js/2.18a21ebb.chunk.js.map": "/padel-score-tracker/static/js/2.18a21ebb.chunk.js.map",
     "index.html": "/padel-score-tracker/index.html",
-    "precache-manifest.aed4370963a32a9dd250a6af400a1858.js": "/padel-score-tracker/precache-manifest.aed4370963a32a9dd250a6af400a1858.js",
+    "precache-manifest.faef48658cf299737685de3dd262a684.js": "/padel-score-tracker/precache-manifest.faef48658cf299737685de3dd262a684.js",
     "service-worker.js": "/padel-score-tracker/service-worker.js",
     "static/css/2.f44440ab.chunk.css.map": "/padel-score-tracker/static/css/2.f44440ab.chunk.css.map",
     "static/css/main.694fc21f.chunk.css.map": "/padel-score-tracker/static/css/main.694fc21f.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.f44440ab.chunk.css",
     "static/js/2.18a21ebb.chunk.js",
     "static/css/main.694fc21f.chunk.css",
-    "static/js/main.c83fc4c0.chunk.js"
+    "static/js/main.ad707c13.chunk.js"
   ]
 }

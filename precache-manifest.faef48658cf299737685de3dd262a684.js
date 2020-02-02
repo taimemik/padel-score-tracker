@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bd0ce52eb4ee64c8ed9c9f8c0950ff1d",
+    "revision": "0da1d15b058e3218a4e15abd13dcef30",
     "url": "/padel-score-tracker/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/padel-score-tracker/static/css/2.f44440ab.chunk.css"
   },
   {
-    "revision": "18c9236eb4c2422e7567",
+    "revision": "a7dea42911120f19e813",
     "url": "/padel-score-tracker/static/css/main.694fc21f.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/padel-score-tracker/static/js/2.18a21ebb.chunk.js.LICENSE"
   },
   {
-    "revision": "18c9236eb4c2422e7567",
-    "url": "/padel-score-tracker/static/js/main.c83fc4c0.chunk.js"
+    "revision": "a7dea42911120f19e813",
+    "url": "/padel-score-tracker/static/js/main.ad707c13.chunk.js"
   },
   {
     "revision": "94933d2df46c07e2121d",

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/padel-score-tracker/precache-manifest.aed4370963a32a9dd250a6af400a1858.js"
+  "/padel-score-tracker/precache-manifest.faef48658cf299737685de3dd262a684.js"
 );
 
 self.addEventListener('message', (event) => {
