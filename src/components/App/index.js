@@ -33,7 +33,7 @@ function App() {
   );
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename="/">
         <Container maxWidth="sm">
           <Typography component="div" style={{}} >
             <CssBaseline />

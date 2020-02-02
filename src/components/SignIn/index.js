@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import PropTypes from "prop-types";
 
-import { SignUpLink } from '../SignUp';
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import './signIn.css';
+import { SignUpLink } from "../SignUp";
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../../constants/routes";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import "./signIn.css";
 
 const SignInPage = () => (
   <div className="flex-container">
@@ -19,8 +20,8 @@ const SignInPage = () => (
 );
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
   error: null,
 };
 
@@ -54,7 +55,7 @@ class SignInFormBase extends Component {
   render() {
     const { email, password, error } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === "" || email === "";
 
     return (
       <Container maxWidth="sm">
@@ -79,9 +80,14 @@ class SignInFormBase extends Component {
               onChange={this.onChange}
             />
 
-            <Button variant="contained" color="primary" disabled={isInvalid} type="submit">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isInvalid}
+              type="submit"
+            >
               Sign In
-          </Button>
+            </Button>
 
             {error && <p>{error.message}</p>}
           </div>
@@ -91,9 +97,14 @@ class SignInFormBase extends Component {
   }
 }
 
+SignInFormBase.propTypes = {
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+};
+
 const SignInForm = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignInFormBase);
 
 export default SignInPage;
