@@ -1,18 +1,15 @@
-import React from 'react';
-import Link from '@material-ui/core/Link';
+import React from "react";
+import Link from "@material-ui/core/Link";
 
-import SignOutLink from '../SignOut/link';
-import * as ROUTES from '../../constants/routes';
+import SignOutLink from "../SignOut/link";
+import * as ROUTES from "../../constants/routes";
 
-import { AuthUserContext } from '../Session';
-
+import { AuthUserContext } from "../Session";
 
 const Navigation = () => (
-  <div >
+  <div>
     <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? <NavigationAuth /> : <NavigationNonAuth />
-      }
+      {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
     </AuthUserContext.Consumer>
   </div>
 );
@@ -32,9 +29,11 @@ const NavigationAuth = () => (
       <Link href={ROUTES.ADMIN}>Admin</Link>
     </li>
     <li>
+      <Link href={ROUTES.GROUPS}>Groups</Link>
+    </li>
+    <li>
       <SignOutLink />
     </li>
-
   </ul>
 );
 
