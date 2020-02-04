@@ -40,10 +40,12 @@ class Firebase {
   users = () => this.db.ref("users");
 
   // *** Message API ***
-
   message = uid => this.db.ref(`messages/${uid}`);
-
   messages = () => this.db.ref("messages");
+
+  // *** Team API ***
+  team = uid => this.db.ref(`teams/${uid}`);
+  teams = () => this.db.ref("teams");
 }
 
 export default Firebase;
