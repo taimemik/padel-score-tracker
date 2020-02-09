@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withAuthorization } from "../Session";
-// import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -21,15 +20,16 @@ const HomePage = () => (
 
 const condition = authUser => !!authUser;
 const INITIAL_STATE = {
-  player1: "",
-  player2: "",
-  player3: "",
-  player4: "",
+  player1: null,
+  player2: null,
+  player3: null,
+  player4: null,
   error: null,
   team1: null,
   team2: null,
   loading: false,
   users: [],
+  colors: ["#ff7878", "yellow", "#9191f5", "#ef42ef", "#00ffd0", "#ff8100"],
 };
 
 class PlayerFormBase extends Component {
@@ -37,6 +37,7 @@ class PlayerFormBase extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
+
   componentDidMount() {
     this.setState({ loading: true });
     this.props.firebase.users().on("value", snapshot => {
@@ -44,6 +45,9 @@ class PlayerFormBase extends Component {
       const usersList = Object.keys(usersObject).map(key => ({
         ...usersObject[key],
         uid: key,
+        color: this.state.colors[
+          Math.floor(Math.random() * this.state.colors.length)
+        ],
       }));
       this.setState({
         users: usersList,
@@ -55,53 +59,101 @@ class PlayerFormBase extends Component {
     this.props.firebase.users().off();
   }
 
-  onCreateTeam1 = (event, authUser) => {
+  onCreateTeams = (event, authUser) => {
     const result = this.props.firebase.teams().push({
       player1: this.state.player1,
       player2: this.state.player2,
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
       createdBy: authUser.uid,
     });
-    console.log(result.key);
     this.setState({ team1: result.key });
-    event.preventDefault();
-  };
-
-  onCreateTeam2 = (event, authUser) => {
-    const result = this.props.firebase.teams().push({
+    const result2 = this.props.firebase.teams().push({
       player1: this.state.player3,
       player2: this.state.player4,
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
       createdBy: authUser.uid,
     });
-    console.log(result.key);
-    this.setState({ team2: result.key });
+    this.setState({ team2: result2.key });
     event.preventDefault();
   };
 
-  onChange = event => {
-    console.log(event.target.name);
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  onAvatarClick = event => {
-    console.log(event.target);
-  };
-
-  onAvatarClick2 = uid => {
+  onPlayerSelectedTeam1 = uid => {
     console.log(uid);
+    if (!this.playerAlreadySelected(uid)) {
+      if (!this.state.player1) {
+        this.setState({ player1: uid });
+      } else {
+        if (!this.state.player2) {
+          this.setState({ player2: uid });
+        }
+      }
+    }
   };
 
-  UserList = ({ users }) => (
-    <div className="navigation">
+  onPlayerSelectedTeam2 = uid => {
+    console.log(uid);
+    if (!this.playerAlreadySelected(uid)) {
+      if (!this.state.player3) {
+        this.setState({ player3: uid });
+      } else {
+        if (!this.state.player4) {
+          this.setState({ player4: uid });
+        }
+      }
+    }
+  };
+
+  playerAlreadySelected = uid => {
+    let isSelected = false;
+    if (this.state.player1 && this.state.player1 === uid) {
+      this.setState({ player1: null });
+      isSelected = true;
+    }
+    if (this.state.player2 && this.state.player2 === uid) {
+      this.setState({ player2: null });
+      isSelected = true;
+    }
+    if (this.state.player3 && this.state.player3 === uid) {
+      this.setState({ player3: null });
+      isSelected = true;
+    }
+    if (this.state.player4 && this.state.player4 === uid) {
+      this.setState({ player4: null });
+      isSelected = true;
+    }
+    return isSelected;
+  };
+
+  UserListTeam1 = ({ users }) => (
+    <div className="userSelection">
       {users.map(user => (
-        <Tooltip key={user.uid} title={user.username}>
+        <Tooltip
+          key={user.uid}
+          title={user.username}
+          disabled={
+            this.state.team1 &&
+            this.state.team2 &&
+            (this.state.team1 !== user.uid && this.state.team2 !== user.uid)
+          }
+        >
           <IconButton
+            disabled={
+              this.state.team1 &&
+              this.state.team2 &&
+              (this.state.team1 !== user.uid && this.state.team2 !== user.uid)
+            }
+            className={this.IsSelectedTeam1(user.uid) ? "buttonSelected" : null}
             key={user.uid}
             name={user.uid}
-            onClick={() => this.onAvatarClick2(user.uid)}
+            onClick={() => this.onPlayerSelectedTeam1(user.uid)}
           >
-            <Avatar className="userAvatar" key={user.uid}>
+            <Avatar
+              className="userAvatar"
+              style={{
+                backgroundColor: user.color,
+              }}
+              key={user.uid}
+            >
               {this.GetInitials(user.username)}
             </Avatar>
           </IconButton>
@@ -109,6 +161,51 @@ class PlayerFormBase extends Component {
       ))}
     </div>
   );
+
+  UserListTeam2 = ({ users }) => (
+    <div className="userSelection">
+      {users.map(user => (
+        <Tooltip key={user.uid} title={user.username}>
+          <IconButton
+            className={this.IsSelectedTeam2(user.uid) ? "buttonSelected" : null}
+            key={user.uid}
+            name={user.uid}
+            onClick={() => this.onPlayerSelectedTeam2(user.uid)}
+          >
+            <Avatar
+              className="userAvatar"
+              style={{
+                backgroundColor: user.color,
+              }}
+              key={user.uid}
+            >
+              {this.GetInitials(user.username)}
+            </Avatar>
+          </IconButton>
+        </Tooltip>
+      ))}
+    </div>
+  );
+
+  IsSelectedTeam1 = uid => {
+    if (
+      (this.state.player1 && this.state.player1 === uid) ||
+      (this.state.player2 && this.state.player2 === uid)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  IsSelectedTeam2 = uid => {
+    if (
+      (this.state.player3 && this.state.player3 === uid) ||
+      (this.state.player4 && this.state.player4 === uid)
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   GetInitials = userName => {
     if (userName) {
@@ -121,95 +218,45 @@ class PlayerFormBase extends Component {
     return "player1";
   };
 
-  getTeam1(authUser) {
-    const { error, team1, player2, player1 } = this.state;
-    return (
-      <div>
-        <h4>Team 1</h4>
-        {!team1 ? (
-          <div className="flex-container">
-            <TextField
-              name="player1"
-              required
-              id="outlined-player1"
-              label="Player1"
-              variant="outlined"
-              onChange={this.onChange}
-            />
-            <TextField
-              name="player2"
-              required
-              id="outlined-player2"
-              label="Player2"
-              variant="outlined"
-              onChange={this.onChange}
-            />
-            {error && <p>{error.message}</p>}
-            <button onClick={event => this.onCreateTeam1(event, authUser)}>
-              Save
-            </button>
-          </div>
-        ) : (
-          <span>
-            {player1} + {player2}
-          </span>
-        )}
-      </div>
-    );
-  }
-
-  getTeam2(authUser) {
-    const { error, team2, player3, player4 } = this.state;
-    return (
-      <div>
-        <h4>Team 2</h4>
-        {!team2 ? (
-          <div className="flex-container">
-            <TextField
-              name="player3"
-              required
-              id="outlined-player3"
-              label="Player3"
-              variant="outlined"
-              onChange={this.onChange}
-            />
-            <TextField
-              name="player4"
-              required
-              id="outlined-player4"
-              label="Player4"
-              variant="outlined"
-              onChange={this.onChange}
-            />
-            {error && <p>{error.message}</p>}
-            <button onClick={event => this.onCreateTeam2(event, authUser)}>
-              Save
-            </button>
-          </div>
-        ) : (
-          <span>
-            {player3} + {player4}
-          </span>
-        )}
-      </div>
-    );
-  }
-
   render() {
-    const { player1, player2, team1, users, loading } = this.state;
+    const { player1, player2, player3, player4, users, loading } = this.state;
 
-    const isInvalid = player1 === "" || player2 === "";
+    const isInvalid = !player1 || !player2 || !player3 || !player4;
 
     return (
       <AuthUserContext.Consumer>
         {authUser => (
           <Container maxWidth="sm">
             <form>
-              {loading && <div>Loading ...</div>}
-              <this.UserList users={users} />
-              <div className="flex-container">
-                {this.getTeam1(authUser)}
-                {team1 ? this.getTeam2(authUser) : null}
+              <div className="teamSelection">
+                {loading && <div>Loading ...</div>}
+                <h4>Team 1</h4>
+                <this.UserListTeam1
+                  users={users.filter(
+                    u =>
+                      u.uid !== this.state.player3 &&
+                      u.uid !== this.state.player4
+                  )}
+                />
+                <h4>Team 2</h4>
+                <this.UserListTeam2
+                  users={users.filter(
+                    u =>
+                      u.uid !== this.state.player1 &&
+                      u.uid !== this.state.player2
+                  )}
+                />
+
+                <Button
+                  className="teamButton"
+                  variant="contained"
+                  color="primary"
+                  disabled={isInvalid}
+                  type="submit"
+                  onClick={event => this.onCreateTeams(event, authUser)}
+                >
+                  Save teams
+                </Button>
               </div>
             </form>
           </Container>
