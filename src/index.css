@@ -100,3 +100,25 @@ code {
   margin: 0;
   /* background: deepskyblue; */
 }
+
+.scoreSelection {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+
+  list-style: none;
+  margin: 0;
+}
+
+.invertedScoreSelection {
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: center;
+
+  list-style: none;
+  margin: 0;
+}
+
+.ratingBox {
+  padding-right: 10px;
+}
