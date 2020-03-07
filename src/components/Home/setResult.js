@@ -53,7 +53,12 @@ class SetResult extends Component {
           icon={<FiberManualRecordIcon fontSize="inherit" />}
         />
         {(this.state.hover !== -1 || this.props.result !== null) && (
-          <Box ml={2} className="ratingBox">
+          <Box
+            ml={2}
+            className={
+              this.props.isInverted ? "invertedRatingBox" : "ratingBox"
+            }
+          >
             {this.state.hover !== -1 ? this.state.hover : this.props.result}
           </Box>
         )}

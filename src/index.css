@@ -122,3 +122,8 @@ code {
 .ratingBox {
   padding-right: 10px;
 }
+
+.invertedRatingBox {
+  padding-right: 10px;
+  margin-left: 10px !important;
+}

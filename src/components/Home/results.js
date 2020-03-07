@@ -4,10 +4,13 @@ import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import SetResult from "./setResult";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const INITIAL_STATE = {
   result1: 0,
   result2: 0,
+  results: [],
+  setId: 0,
 };
 
 class Results extends Component {
@@ -28,13 +31,29 @@ class Results extends Component {
   );
 
   setTeamResult1 = newValue => {
-    console.log("result1" + newValue);
     this.setState({ result1: newValue });
   };
 
   setTeamResult2 = value => {
-    console.log("result2" + value);
     this.setState({ result2: value });
+  };
+
+  addNewSet = () => {
+    let id = this.state.setId;
+    id = id + 1;
+    const results = this.state.results;
+    results.push({
+      team1Result: this.state.result1,
+      team2Result: this.state.result2,
+      setId: id,
+    });
+    this.setState({
+      results: results,
+      result1: 0,
+      result2: 0,
+      setId: id,
+    });
+    console.log(id);
   };
 
   render() {
@@ -66,7 +85,13 @@ class Results extends Component {
                       {this.props.team1.player2.initials}
                     </Avatar>
                   </Tooltip>
-                  VS
+                  <span
+                    style={{
+                      paddingTop: "25px",
+                    }}
+                  >
+                    VS
+                  </span>
                   <Tooltip title={this.props.team2.player1.username} disabled>
                     <Avatar
                       className="userAvatar"
@@ -89,6 +114,19 @@ class Results extends Component {
                   </Tooltip>
                 </div>
               </div>
+              {this.state.results.map(result => (
+                <div key={result.setId} className="userSelection">
+                  <span>
+                    <span style={{ paddingLeft: "10px" }}>
+                      {result.team1Result}
+                    </span>
+                    <span style={{ paddingLeft: "10px" }}>-</span>
+                    <span style={{ paddingLeft: "10px" }}>
+                      {result.team2Result}
+                    </span>
+                  </span>
+                </div>
+              ))}
               <div className="userSelection">
                 <SetResult
                   setTeamResult={this.setTeamResult1}
@@ -96,13 +134,18 @@ class Results extends Component {
                   name={"result1"}
                   isInverted={false}
                 />
-                <span> -</span>
+                <span>-</span>
                 <SetResult
                   setTeamResult={this.setTeamResult2}
                   result={this.state.result2}
                   name={"result2"}
                   isInverted={true}
                 />
+              </div>
+              <div className="userSelection">
+                <IconButton aria-label="delete" onClick={this.addNewSet}>
+                  <AddCircleOutlineIcon />
+                </IconButton>
               </div>
             </div>
           )}
