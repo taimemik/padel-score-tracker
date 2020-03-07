@@ -7,10 +7,8 @@ import SetResult from "./setResult";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const INITIAL_STATE = {
-  result1: 0,
-  result2: 0,
-  results: [],
-  setId: 0,
+  results: [{ team1Result: 0, team2Result: 0, setId: 1 }],
+  setId: 1,
 };
 
 class Results extends Component {
@@ -31,29 +29,64 @@ class Results extends Component {
   );
 
   setTeamResult1 = newValue => {
-    this.setState({ result1: newValue });
+    let id = this.state.setId;
+    let array = [...this.state.results];
+    let index = array.findIndex(res => res.setId === id);
+    const resultTest = array.find(res => res.setId === id);
+    resultTest.team1Result = newValue;
+    array[index] = resultTest;
+    this.setState({ results: array });
   };
 
-  setTeamResult2 = value => {
-    this.setState({ result2: value });
+  setTeamResult2 = newValue => {
+    let id = this.state.setId;
+    let array = [...this.state.results];
+    let index = array.findIndex(res => res.setId === id);
+    const resultTest = array.find(res => res.setId === id);
+    resultTest.team2Result = newValue;
+    array[index] = resultTest;
+    this.setState({ results: array });
   };
 
   addNewSet = () => {
     let id = this.state.setId;
-    id = id + 1;
+    // const result1 = this.state.result1;
+    // const result2 = this.state.result2;
+
     const results = this.state.results;
+    // const result = this.state.results.find(res => res.setId === id);
     results.push({
-      team1Result: this.state.result1,
-      team2Result: this.state.result2,
-      setId: id,
+      team1Result: 0,
+      team2Result: 0,
+      setId: id + 1,
     });
+
     this.setState({
       results: results,
-      result1: 0,
-      result2: 0,
-      setId: id,
+      setId: id + 1,
     });
-    console.log(id);
+
+    // let array = [...results];
+    // let index = array.findIndex(res => res.setId === id);
+    // const resultTest = array.find(res => res.setId === id);
+    // resultTest.team1Result = result1;
+    // resultTest.team2Result = result2;
+    // array[index] = resultTest;
+    // this.setState({ results: array });
+
+    // this.setState({
+    //   results: this.state.results.map(result =>
+    //     result.setId === id
+    //       ? {
+    //           ...result,
+    //           team1Result: result1,
+    //           team2Result: result2,
+    //         }
+    //       : result
+    //   ),
+    // });
+    // console.log(resultTest);
+    console.log(this.state.results);
   };
 
   render() {
@@ -115,35 +148,38 @@ class Results extends Component {
                 </div>
               </div>
               {this.state.results.map(result => (
-                <div key={result.setId} className="userSelection">
-                  <span>
-                    <span style={{ paddingLeft: "10px" }}>
-                      {result.team1Result}
-                    </span>
-                    <span style={{ paddingLeft: "10px" }}>-</span>
-                    <span style={{ paddingLeft: "10px" }}>
-                      {result.team2Result}
-                    </span>
-                  </span>
+                // <div key={result.setId} className="userSelection">
+                //   <span>
+                //     <span style={{ paddingLeft: "10px" }}>
+                //       {result.team1Result}
+                //     </span>
+                //     <span style={{ paddingLeft: "10px" }}>-</span>
+                //     <span style={{ paddingLeft: "10px" }}>
+                //       {result.team2Result}
+                //     </span>
+                //   </span>
+                // </div>
+                <div className="userSelection" key={result.setId}>
+                  <SetResult
+                    setTeamResult={this.setTeamResult1}
+                    result={result.team1Result}
+                    name={"result1." + result.setId}
+                    isInverted={false}
+                    isDisabled={result.setId !== this.state.setId}
+                  />
+                  <span>-</span>
+                  <SetResult
+                    setTeamResult={this.setTeamResult2}
+                    result={result.team2Result}
+                    name={"result2." + result.setId}
+                    isInverted={true}
+                    isDisabled={result.setId !== this.state.setId}
+                  />
                 </div>
               ))}
+
               <div className="userSelection">
-                <SetResult
-                  setTeamResult={this.setTeamResult1}
-                  result={this.state.result1}
-                  name={"result1"}
-                  isInverted={false}
-                />
-                <span>-</span>
-                <SetResult
-                  setTeamResult={this.setTeamResult2}
-                  result={this.state.result2}
-                  name={"result2"}
-                  isInverted={true}
-                />
-              </div>
-              <div className="userSelection">
-                <IconButton aria-label="delete" onClick={this.addNewSet}>
+                <IconButton aria-label="add new set" onClick={this.addNewSet}>
                   <AddCircleOutlineIcon />
                 </IconButton>
               </div>

@@ -39,6 +39,7 @@ class SetResult extends Component {
         }
       >
         <StyledRating
+          disabled={this.props.isDisabled}
           name={this.props.name}
           max={7}
           defaultValue={0}
@@ -72,6 +73,7 @@ SetResult.propTypes = {
   setTeamResult: PropTypes.func,
   name: PropTypes.string,
   isInverted: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };
 
 export default SetResult;
