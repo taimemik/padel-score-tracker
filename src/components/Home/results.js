@@ -50,11 +50,8 @@ class Results extends Component {
 
   addNewSet = () => {
     let id = this.state.setId;
-    // const result1 = this.state.result1;
-    // const result2 = this.state.result2;
 
     const results = this.state.results;
-    // const result = this.state.results.find(res => res.setId === id);
     results.push({
       team1Result: 0,
       team2Result: 0,
@@ -65,28 +62,6 @@ class Results extends Component {
       results: results,
       setId: id + 1,
     });
-
-    // let array = [...results];
-    // let index = array.findIndex(res => res.setId === id);
-    // const resultTest = array.find(res => res.setId === id);
-    // resultTest.team1Result = result1;
-    // resultTest.team2Result = result2;
-    // array[index] = resultTest;
-    // this.setState({ results: array });
-
-    // this.setState({
-    //   results: this.state.results.map(result =>
-    //     result.setId === id
-    //       ? {
-    //           ...result,
-    //           team1Result: result1,
-    //           team2Result: result2,
-    //         }
-    //       : result
-    //   ),
-    // });
-    // console.log(resultTest);
-    console.log(this.state.results);
   };
 
   render() {
@@ -148,17 +123,6 @@ class Results extends Component {
                 </div>
               </div>
               {this.state.results.map(result => (
-                // <div key={result.setId} className="userSelection">
-                //   <span>
-                //     <span style={{ paddingLeft: "10px" }}>
-                //       {result.team1Result}
-                //     </span>
-                //     <span style={{ paddingLeft: "10px" }}>-</span>
-                //     <span style={{ paddingLeft: "10px" }}>
-                //       {result.team2Result}
-                //     </span>
-                //   </span>
-                // </div>
                 <div className="userSelection" key={result.setId}>
                   <SetResult
                     setTeamResult={this.setTeamResult1}
